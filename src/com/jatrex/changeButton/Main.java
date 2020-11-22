@@ -16,6 +16,7 @@ public class Main extends Application{
         Parent root = startWindow.load();
 
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("views/styles/style.css").toExternalForm());
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setTitle("ChangeButton");
         primaryStage.setScene(scene);

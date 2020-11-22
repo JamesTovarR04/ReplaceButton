@@ -1,0 +1,17 @@
+.scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.scroll-bar:vertical .thumb{
+    -fx-background-color: #352e2d;
+    -fx-background-radius: 0;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.button:hover {
+    -fx-opacity: 0.8;
+}

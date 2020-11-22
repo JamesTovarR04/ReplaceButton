@@ -2,10 +2,17 @@ package com.jatrex.changeButton.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class StartWindowController {
 
@@ -13,9 +20,18 @@ public class StartWindowController {
     private double yOffset = 0;
     @FXML
     private HBox header;
+    @FXML
+    private ScrollPane listChanges;
 
     public StartWindowController(){
 
+    }
+
+    @FXML
+    private void initialize() throws IOException {
+        HBox row = FXMLLoader.load(getClass().getResource("../views/rowChanges.fxml"));
+        VBox listContainer = new VBox(row);
+        listChanges.setContent(listContainer);
     }
 
     @FXML
