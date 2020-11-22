@@ -8,21 +8,21 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="370.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ToggleButton mnemonicParsing="false" prefHeight="32.0" prefWidth="0.0" style="-fx-background-color: transparent;">
+      <ToggleButton fx:id="activateChangeButton" mnemonicParsing="false" onAction="#activateChange" prefHeight="32.0" prefWidth="0.0" style="-fx-background-color: transparent;">
          <HBox.margin>
             <Insets right="8.0" top="8.0" />
          </HBox.margin>
          <graphic>
-            <Circle fill="#a4a4a4" radius="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Circle fx:id="activeCircle" fill="#a4a4a4" radius="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
          </graphic>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <tooltip><Tooltip text="Activate" /></tooltip>
       </ToggleButton>
-      <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-color: #352e2d; -fx-background-radius: 3;" text="Button A" textFill="#c9c9c9">
+      <Button fx:id="buttonA" mnemonicParsing="false" onAction="#buttonClick" prefHeight="32.0" prefWidth="130.0" style="-fx-background-color: #352e2d; -fx-background-radius: 3;" text="Button A" textFill="#c9c9c9">
          <HBox.margin>
             <Insets top="8.0" />
          </HBox.margin>
@@ -33,7 +33,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
          <graphic>
-            <ImageView fitHeight="26.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="buttonAImage" fitHeight="26.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/add.png" />
                </image>
@@ -47,7 +47,7 @@
             <Image url="@images/arrowRight.png" />
          </image>
       </ImageView>
-      <Button disable="true" layoutX="42.0" layoutY="18.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-color: #352e2d; -fx-background-radius: 3;" text="Button B" textFill="#c9c9c9">
+      <Button fx:id="buttonB" disable="true" layoutX="42.0" layoutY="18.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="32.0" prefWidth="130.0" style="-fx-background-color: #352e2d; -fx-background-radius: 3;" text="Button B" textFill="#c9c9c9">
          <font>
             <Font size="13.0" />
          </font>
@@ -55,7 +55,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
          <graphic>
-            <ImageView fitHeight="26.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="buttonBImage" fitHeight="26.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/add.png" />
                </image>
@@ -65,7 +65,7 @@
             <Insets top="8.0" />
          </HBox.margin>
       </Button>
-      <Button contentDisplay="BOTTOM" ellipsisString="Delete" mnemonicParsing="false" opacity="0.5" prefHeight="25.0" prefWidth="23.0" style="-fx-background-image: url(&quot;file:D:/Programacion/JAVA/IdeaProjects/ChangeButton/src/com/jatrex/changeButton/views/images/delete.png&quot;); -fx-background-repeat: none; -fx-background-position: center; -fx-background-repeat: no-repeat; -fx-background-color: transparent; -fx-background-size: 80%;">
+      <Button fx:id="deleteButton" contentDisplay="BOTTOM" disable="true" ellipsisString="Delete" mnemonicParsing="false" opacity="0.0" prefHeight="25.0" prefWidth="23.0" style="-fx-background-image: url(&quot;file:D:/Programacion/JAVA/IdeaProjects/ChangeButton/src/com/jatrex/changeButton/views/images/delete.png&quot;); -fx-background-repeat: none; -fx-background-position: center; -fx-background-repeat: no-repeat; -fx-background-color: transparent; -fx-background-size: 80%;">
          <HBox.margin>
             <Insets left="5.0" top="12.0" />
          </HBox.margin>

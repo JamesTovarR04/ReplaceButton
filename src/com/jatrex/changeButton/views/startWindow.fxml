@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="319.0" prefWidth="400.0" style="-fx-background-color: #1c1716;" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jatrex.changeButton.controllers.StartWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="319.0" prefWidth="400.0" style="-fx-background-color: #1c1716;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jatrex.changeButton.controllers.StartWindowController">
    <children>
       <HBox fx:id="header" onMouseDragged="#moveDragged" onMousePressed="#movePreset" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #666; -fx-border-width: 0 0 1 0; -fx-background-color: #151211;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -57,7 +57,7 @@
       </HBox>
       <HBox layoutY="40.0" prefHeight="40.0" prefWidth="400.0" style="-fx-border-color: #666; -fx-border-width: 0 0 1 0;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <ToggleButton fx:id="dibujar" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="19.0" prefWidth="33.0" style="-fx-padding: 1 2 1 2; -fx-background-radius: 30; -fx-background-color: #4f4f4f;" textFill="#c3c3c3" HBox.hgrow="ALWAYS">
+            <ToggleButton fx:id="activateButton" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#activate" prefHeight="19.0" prefWidth="33.0" style="-fx-padding: 1 3 1 3; -fx-background-radius: 30; -fx-background-color: #4f4f4f;" textFill="#c3c3c3" HBox.hgrow="ALWAYS">
                <graphic>
                   <Circle fill="WHITE" radius="7.0" stroke="BLACK" strokeMiterLimit="9.0" strokeType="INSIDE" strokeWidth="0.0" />
                </graphic>
@@ -68,7 +68,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ToggleButton>
-            <Label prefHeight="39.0" text="Desactivado" textFill="#9a9a9a">
+            <Label fx:id="statusLabel" prefHeight="39.0" prefWidth="81.0" text="Disabled" textFill="#9a9a9a">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>

@@ -3,13 +3,14 @@ package com.jatrex.changeButton.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,14 +23,18 @@ public class StartWindowController {
     private HBox header;
     @FXML
     private ScrollPane listChanges;
-
-    public StartWindowController(){
-
-    }
+    @FXML
+    private ToggleButton activateButton;
+    @FXML
+    private Label statusLabel;
 
     @FXML
     private void initialize() throws IOException {
-        HBox row = FXMLLoader.load(getClass().getResource("../views/rowChanges.fxml"));
+        RowChangeController controllerRow = new RowChangeController();
+        FXMLLoader viewRowChange = new FXMLLoader(getClass().getResource("../views/rowChange.fxml"));
+        viewRowChange.setController(controllerRow);
+        HBox row = viewRowChange.load();
+
         VBox listContainer = new VBox(row);
         listChanges.setContent(listContainer);
     }
@@ -55,6 +60,19 @@ public class StartWindowController {
         Stage stage = (Stage)header.getScene().getWindow();
         stage.setX(evt.getScreenX() - xOffset);
         stage.setY(evt.getScreenY() - yOffset);
+    }
+
+    @FXML
+    private void activate(ActionEvent event){
+        if(activateButton.isSelected()){
+            activateButton.setAlignment(Pos.CENTER_RIGHT);
+            activateButton.setStyle("-fx-padding: 1 3 1 3; -fx-background-radius: 30;-fx-background-color: #489742;");
+            statusLabel.setText("Active");
+        } else{
+            activateButton.setAlignment(Pos.CENTER_LEFT);
+            activateButton.setStyle("-fx-padding: 1 3 1 3; -fx-background-radius: 30;-fx-background-color: #4f4f4f;");
+            statusLabel.setText("Disabled");
+        }
     }
 
 }
