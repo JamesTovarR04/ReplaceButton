@@ -4,15 +4,22 @@ import com.jatrex.changeButton.classes.ButtonCode;
 import com.jatrex.changeButton.classes.ReadButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.io.IOException;
+
 public class RowChangeController {
 
+    @FXML
+    HBox container;
     @FXML
     Circle activeCircle;
     @FXML
@@ -23,6 +30,7 @@ public class RowChangeController {
     ToggleButton activateChangeButton;
 
     Button standbyButton;
+    VBox listContainer;
 
     @FXML
     private void activateChange(ActionEvent event){
@@ -39,6 +47,10 @@ public class RowChangeController {
 
         ReadButton reader = new ReadButton();
         reader.setRowChangeController(this);
+    }
+
+    public void setListContainer(VBox listContainer){
+        this.listContainer = listContainer;
     }
 
     public void changeButton(ButtonCode buttonCode){
@@ -60,6 +72,25 @@ public class RowChangeController {
            changeColorActiveCircle();
            deleteButton.setOpacity(1.0);
            deleteButton.setDisable(false);
+           createRowChange();
+        }
+
+    }
+
+    private void createRowChange(){
+        // If it not is the last element don´t create a new element
+        if((listContainer.getChildren().indexOf(container) + 1) == listContainer.getChildren().size()) {
+            RowChangeController controllerRow = new RowChangeController();
+            FXMLLoader viewRowChange = new FXMLLoader(getClass().getResource("../views/rowChange.fxml"));
+            viewRowChange.setController(controllerRow);
+            HBox row = new HBox();
+            try {
+                row = viewRowChange.load();
+            } catch (IOException ex) {
+                System.out.println("Error: " + ex.getMessage());
+            }
+            listContainer.getChildren().add(row);
+            controllerRow.setListContainer(listContainer);
         }
     }
 
@@ -77,5 +108,9 @@ public class RowChangeController {
             activeCircle.setFill(Color.web("#a4a4a4"));
     }
 
+    @FXML
+    private void deleteRow(){
+        listContainer.getChildren().remove(container);
+    }
 
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="370.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ToggleButton fx:id="activateChangeButton" mnemonicParsing="false" onAction="#activateChange" prefHeight="32.0" prefWidth="0.0" style="-fx-background-color: transparent;">
          <HBox.margin>
@@ -65,7 +65,7 @@
             <Insets top="8.0" />
          </HBox.margin>
       </Button>
-      <Button fx:id="deleteButton" contentDisplay="BOTTOM" disable="true" ellipsisString="Delete" mnemonicParsing="false" opacity="0.0" prefHeight="25.0" prefWidth="23.0" style="-fx-background-image: url(&quot;file:D:/Programacion/JAVA/IdeaProjects/ChangeButton/src/com/jatrex/changeButton/views/images/delete.png&quot;); -fx-background-repeat: none; -fx-background-position: center; -fx-background-repeat: no-repeat; -fx-background-color: transparent; -fx-background-size: 80%;">
+      <Button fx:id="deleteButton" contentDisplay="BOTTOM" disable="true" ellipsisString="Delete" mnemonicParsing="false" onAction="#deleteRow" opacity="0.0" prefHeight="25.0" prefWidth="23.0" style="-fx-background-image: url(&quot;file:D:/Programacion/JAVA/IdeaProjects/ChangeButton/src/com/jatrex/changeButton/views/images/delete.png&quot;); -fx-background-repeat: none; -fx-background-position: center; -fx-background-repeat: no-repeat; -fx-background-color: transparent; -fx-background-size: 80%;">
          <HBox.margin>
             <Insets left="5.0" top="12.0" />
          </HBox.margin>
