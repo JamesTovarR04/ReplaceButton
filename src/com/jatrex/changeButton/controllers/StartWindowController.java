@@ -1,5 +1,6 @@
 package com.jatrex.changeButton.controllers;
 
+import com.jatrex.changeButton.classes.ManagerChangesButtons;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,13 +15,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class StartWindowController {
 
-    private double xOffset = 0;
-    private double yOffset = 0;
     @FXML
     private HBox header;
     @FXML
@@ -30,10 +27,16 @@ public class StartWindowController {
     @FXML
     private Label statusLabel;
 
+    private double xOffset = 0;
+    private double yOffset = 0;
+    private ManagerChangesButtons managerChangesButtons;
     private VBox listContainer;
 
     @FXML
     private void initialize() throws IOException {
+        managerChangesButtons = new ManagerChangesButtons();
+
+        // Generate first row
         RowChangeController controllerRow = new RowChangeController();
         FXMLLoader viewRowChange = new FXMLLoader(getClass().getResource("../views/rowChange.fxml"));
         viewRowChange.setController(controllerRow);
@@ -41,6 +44,7 @@ public class StartWindowController {
 
         listContainer = new VBox(row);
         controllerRow.setListContainer(listContainer);
+        controllerRow.setManagerChangesButtons(managerChangesButtons);
         listChanges.setContent(listContainer);
     }
 
@@ -78,14 +82,6 @@ public class StartWindowController {
             activateButton.setStyle("-fx-padding: 1 3 1 3; -fx-background-radius: 30;-fx-background-color: #4f4f4f;");
             statusLabel.setText("Disabled");
         }
-    }
-
-    public void addChangeButton() throws IOException {
-        RowChangeController controllerRow = new RowChangeController();
-        FXMLLoader viewRowChange = new FXMLLoader(getClass().getResource("../views/rowChange.fxml"));
-        viewRowChange.setController(controllerRow);
-        HBox row = viewRowChange.load();
-        listContainer.getChildren().add(row);
     }
 
 }

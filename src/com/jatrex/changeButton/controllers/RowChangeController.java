@@ -1,6 +1,7 @@
 package com.jatrex.changeButton.controllers;
 
 import com.jatrex.changeButton.classes.ButtonCode;
+import com.jatrex.changeButton.classes.ManagerChangesButtons;
 import com.jatrex.changeButton.classes.ReadButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,8 +30,10 @@ public class RowChangeController {
     @FXML
     ToggleButton activateChangeButton;
 
-    Button standbyButton;
-    VBox listContainer;
+    private Button standbyButton;
+    private VBox listContainer;
+    private ManagerChangesButtons managerChangesButtons;
+    private ButtonCode buttonASave, buttonBSave;
 
     @FXML
     private void activateChange(ActionEvent event){
@@ -49,8 +52,16 @@ public class RowChangeController {
         reader.setRowChangeController(this);
     }
 
+    public ButtonCode getButtonASave(){return buttonASave;}
+
+    public ButtonCode getButtonBSave(){return buttonBSave;}
+
     public void setListContainer(VBox listContainer){
         this.listContainer = listContainer;
+    }
+
+    public void setManagerChangesButtons(ManagerChangesButtons managerChangesButtons){
+        this.managerChangesButtons = managerChangesButtons;
     }
 
     public void changeButton(ButtonCode buttonCode){
@@ -65,6 +76,14 @@ public class RowChangeController {
         standbyButton.setText(text);
         standbyButton.setDisable(false);
 
+        if(standbyButton.getId().equals("buttonA")) {
+            if (buttonASave != null)
+                managerChangesButtons.deleteRowChange(this);
+            buttonASave = buttonCode;
+            managerChangesButtons.addRowChange(this);
+        } else
+            buttonBSave = buttonCode;
+
         if (buttonB.isDisable()){
             buttonB.setDisable(false);
         }else {
@@ -72,6 +91,7 @@ public class RowChangeController {
            changeColorActiveCircle();
            deleteButton.setOpacity(1.0);
            deleteButton.setDisable(false);
+           //registerChangeButton();
            createRowChange();
         }
 
@@ -83,6 +103,7 @@ public class RowChangeController {
             RowChangeController controllerRow = new RowChangeController();
             FXMLLoader viewRowChange = new FXMLLoader(getClass().getResource("../views/rowChange.fxml"));
             viewRowChange.setController(controllerRow);
+            controllerRow.setManagerChangesButtons(managerChangesButtons);
             HBox row = new HBox();
             try {
                 row = viewRowChange.load();
@@ -91,8 +112,16 @@ public class RowChangeController {
             }
             listContainer.getChildren().add(row);
             controllerRow.setListContainer(listContainer);
+
         }
     }
+
+    /*private void registerChangeButton(){
+        if(buttonASave.getOrigin() == ButtonCode.KEY)
+            changeButtonListener.addButtonListeningKeys(buttonASave.getCode());
+        else
+            changeButtonListener.addButtonListeningMouse(buttonASave.getCode());
+    }*/
 
     private void changeIconButton(String urlImage){
         if(standbyButton.getId().equals("buttonA"))
@@ -110,6 +139,7 @@ public class RowChangeController {
 
     @FXML
     private void deleteRow(){
+        managerChangesButtons.deleteRowChange(this);
         listContainer.getChildren().remove(container);
     }
 
