@@ -34,9 +34,15 @@ public class RowChangeController {
     private VBox listContainer;
     private ManagerChangesButtons managerChangesButtons;
     private ButtonCode buttonASave, buttonBSave;
+    private boolean active;
+
+    public RowChangeController(){
+        active = false;
+    }
 
     @FXML
     private void activateChange(ActionEvent event){
+        active = activateChangeButton.isSelected();
         changeColorActiveCircle();
     }
 
@@ -51,6 +57,8 @@ public class RowChangeController {
         ReadButton reader = new ReadButton();
         reader.setRowChangeController(this);
     }
+
+    public boolean isActive(){return active;}
 
     public ButtonCode getButtonASave(){return buttonASave;}
 
@@ -70,7 +78,7 @@ public class RowChangeController {
             text = "key " + buttonCode.getStringKey();
             changeIconButton("../views/images/keyboard.png");
         }else{
-            text = "Button " + buttonCode.getCode();
+            text = "Button " + buttonCode.getCodeMouse();
             changeIconButton("../views/images/mouse.png");
         }
         standbyButton.setText(text);
@@ -88,10 +96,10 @@ public class RowChangeController {
             buttonB.setDisable(false);
         }else {
            activateChangeButton.setSelected(true);
+           active = true;
            changeColorActiveCircle();
            deleteButton.setOpacity(1.0);
            deleteButton.setDisable(false);
-           //registerChangeButton();
            createRowChange();
         }
 
@@ -115,13 +123,6 @@ public class RowChangeController {
 
         }
     }
-
-    /*private void registerChangeButton(){
-        if(buttonASave.getOrigin() == ButtonCode.KEY)
-            changeButtonListener.addButtonListeningKeys(buttonASave.getCode());
-        else
-            changeButtonListener.addButtonListeningMouse(buttonASave.getCode());
-    }*/
 
     private void changeIconButton(String urlImage){
         if(standbyButton.getId().equals("buttonA"))

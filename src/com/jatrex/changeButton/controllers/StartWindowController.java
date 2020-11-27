@@ -30,7 +30,6 @@ public class StartWindowController {
     private double xOffset = 0;
     private double yOffset = 0;
     private ManagerChangesButtons managerChangesButtons;
-    private VBox listContainer;
 
     @FXML
     private void initialize() throws IOException {
@@ -42,7 +41,7 @@ public class StartWindowController {
         viewRowChange.setController(controllerRow);
         HBox row = viewRowChange.load();
 
-        listContainer = new VBox(row);
+        VBox listContainer = new VBox(row);
         controllerRow.setListContainer(listContainer);
         controllerRow.setManagerChangesButtons(managerChangesButtons);
         listChanges.setContent(listContainer);
@@ -74,10 +73,12 @@ public class StartWindowController {
     @FXML
     private void activate(ActionEvent event){
         if(activateButton.isSelected()){
+            managerChangesButtons.setListenButtons(true);
             activateButton.setAlignment(Pos.CENTER_RIGHT);
             activateButton.setStyle("-fx-padding: 1 3 1 3; -fx-background-radius: 30;-fx-background-color: #489742;");
             statusLabel.setText("Active");
         } else{
+            managerChangesButtons.setListenButtons(false);
             activateButton.setAlignment(Pos.CENTER_LEFT);
             activateButton.setStyle("-fx-padding: 1 3 1 3; -fx-background-radius: 30;-fx-background-color: #4f4f4f;");
             statusLabel.setText("Disabled");
