@@ -78,7 +78,7 @@ public class RowChangeController {
             text = "key " + buttonCode.getStringKey();
             changeIconButton("../views/images/keyboard.png");
         }else{
-            text = "Button " + buttonCode.getCodeMouse();
+            text = "Button " + buttonCode.getCode();
             changeIconButton("../views/images/mouse.png");
         }
         standbyButton.setText(text);
@@ -91,6 +91,8 @@ public class RowChangeController {
             managerChangesButtons.addRowChange(this);
         } else
             buttonBSave = buttonCode;
+
+        managerChangesButtons.restartGlobalListening();
 
         if (buttonB.isDisable()){
             buttonB.setDisable(false);

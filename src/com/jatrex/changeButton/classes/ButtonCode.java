@@ -21,15 +21,4 @@ public class ButtonCode {
 
     public String getStringKey(){ return NativeKeyEvent.getKeyText(code);}
 
-    public String getCodeMouse(){
-        String codeTransform;
-        switch (code){
-            case 4: codeTransform = "2"; break;
-            case 8: codeTransform = "3"; break;
-            case 16: codeTransform = "1"; break;
-            default: codeTransform = "0";
-        }
-        return codeTransform;
-    }
-
 }

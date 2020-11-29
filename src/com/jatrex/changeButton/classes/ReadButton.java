@@ -51,42 +51,31 @@ public class ReadButton implements NativeKeyListener, NativeMouseListener {
     @Override
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
         int code = nativeKeyEvent.getKeyCode();
-        //System.out.println("Key pressed: " + code);
         pressedButtonCode = new ButtonCode(ButtonCode.KEY, code);
         reportButtonPressed();
     }
 
     @Override
-    public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
-
-    }
+    public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) { }
 
     @Override
-    public void nativeKeyTyped(NativeKeyEvent nativeKeyEvent) {
-
-    }
+    public void nativeKeyTyped(NativeKeyEvent nativeKeyEvent) { }
 
     @Override
     public void nativeMouseClicked(NativeMouseEvent nativeMouseEvent) {
         int code = nativeMouseEvent.getButton();
-        int codeTransform;
-        switch (code){
-            case 1: codeTransform = 16; break;
-            case 2: codeTransform = 4; break;
-            case 3: codeTransform = 8; break;
-            default: codeTransform = 0;
-        }
-        pressedButtonCode = new ButtonCode(ButtonCode.MOUSE, codeTransform);
+        // In the Robot and JNativeHook library the codes 2 and 3 are changed
+        if(code == 2) code = 3;
+        else if(code == 3) code = 2;
+
+        pressedButtonCode = new ButtonCode(ButtonCode.MOUSE, code);
         reportButtonPressed();
     }
 
     @Override
-    public void nativeMousePressed(NativeMouseEvent nativeMouseEvent) {
-
-    }
+    public void nativeMousePressed(NativeMouseEvent nativeMouseEvent) { }
 
     @Override
-    public void nativeMouseReleased(NativeMouseEvent nativeMouseEvent) {
+    public void nativeMouseReleased(NativeMouseEvent nativeMouseEvent) { }
 
-    }
 }

@@ -9,7 +9,7 @@ import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseListener;
 
 import java.awt.*;
-import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -21,6 +21,7 @@ public class ManagerChangesButtons implements NativeKeyListener, NativeMouseList
     private final Hashtable<Integer, List<RowChangeController>> tableButtonsMouse;
     private final Hashtable<Integer, List<RowChangeController>> tableKeys;
     private Robot robot;
+    private boolean listening;
 
     public ManagerChangesButtons(){
         tableButtonsMouse = new Hashtable<>();
@@ -49,12 +50,15 @@ public class ManagerChangesButtons implements NativeKeyListener, NativeMouseList
         GlobalScreen.getInstance().removeNativeMouseListener(this);
     }
 
-    private void restartGlobalListening(){
-        finalizeGlobalListening();
-        startGlobalListening();
+    public void restartGlobalListening(){
+        if(listening) {
+            finalizeGlobalListening();
+            startGlobalListening();
+        }
     }
 
     public void setListenButtons(boolean listen){
+        listening = listen;
         if(listen)
             startGlobalListening();
         else
@@ -72,7 +76,6 @@ public class ManagerChangesButtons implements NativeKeyListener, NativeMouseList
             tableButtonsMouse.computeIfAbsent(buttonIndexCode, k -> new ArrayList<>());
             tableButtonsMouse.get(buttonIndexCode).add(rowChangeController);
         }
-        restartGlobalListening();
     }
 
     public void deleteRowChange(RowChangeController rowChangeController){
@@ -95,30 +98,56 @@ public class ManagerChangesButtons implements NativeKeyListener, NativeMouseList
     @Override
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
         int code = nativeKeyEvent.getKeyCode();
-        List<RowChangeController> listKeys = tableKeys.get(code);
-        if(listKeys != null){
-            for (RowChangeController row:listKeys) {
-                if(row.isActive()){
-                    if(row.getButtonBSave().getOrigin() == ButtonCode.KEY)
-                        robot.keyPress(row.getButtonBSave().getCode());
-                    else
-                        robot.mousePress(row.getButtonBSave().getCode());
-                }
-            }
-        }
+        pressButtons(tableKeys.get(code));
     }
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
         int code = nativeKeyEvent.getKeyCode();
-        List<RowChangeController> listKeys = tableKeys.get(code);
-        if(listKeys != null){
-            for (RowChangeController row:listKeys) {
+        releaseButtons(tableKeys.get(code));
+    }
+
+    @Override
+    public void nativeMousePressed(NativeMouseEvent nativeMouseEvent) {
+        int code = nativeMouseEvent.getButton();
+        // In the Robot and JNativeHook library the codes 2 and 3 are changed
+        if(code == 2) code = 3;
+        else if(code == 3) code = 2;
+        pressButtons(tableButtonsMouse.get(code));
+    }
+
+    @Override
+    public void nativeMouseReleased(NativeMouseEvent nativeMouseEvent) {
+        int code = nativeMouseEvent.getButton();
+        // In the Robot and JNativeHook library the codes 2 and 3 are changed
+        if(code == 2) code = 3;
+        else if(code == 3) code = 2;
+        releaseButtons(tableButtonsMouse.get(code));
+    }
+
+    private void pressButtons(List<RowChangeController> listButtons){
+        if(listButtons != null){
+            for (RowChangeController row:listButtons) {
                 if(row.isActive()){
+                    int codeButtonB = row.getButtonBSave().getCode();
                     if(row.getButtonBSave().getOrigin() == ButtonCode.KEY)
-                        robot.keyRelease(row.getButtonBSave().getCode());
+                        robot.keyPress(codeButtonB);
                     else
-                        robot.mouseRelease(row.getButtonBSave().getCode());
+                        robot.mousePress(MouseEvent.getMaskForButton(codeButtonB));
+                }
+            }
+        }
+    }
+
+    private void releaseButtons(List<RowChangeController> listButtons){
+        if(listButtons != null){
+            for (RowChangeController row:listButtons) {
+                if(row.isActive()){
+                    int codeButtonB = row.getButtonBSave().getCode();
+                    if(row.getButtonBSave().getOrigin() == ButtonCode.KEY)
+                        robot.keyRelease(codeButtonB);
+                    else
+                        robot.mouseRelease(MouseEvent.getMaskForButton(codeButtonB));
                 }
             }
         }
@@ -129,53 +158,5 @@ public class ManagerChangesButtons implements NativeKeyListener, NativeMouseList
 
     @Override
     public void nativeMouseClicked(NativeMouseEvent nativeMouseEvent) { }
-
-    @Override
-    public void nativeMousePressed(NativeMouseEvent nativeMouseEvent) {
-        int code = nativeMouseEvent.getButton();
-        int codeTransform;
-        switch (code){
-            case 1: codeTransform = 16; break;
-            case 2: codeTransform = 4; break;
-            case 3: codeTransform = 8; break;
-            default: codeTransform = 0;
-        }
-        List<RowChangeController> listButtons = tableButtonsMouse.get(codeTransform);
-        if(listButtons != null){
-            for (RowChangeController row:listButtons) {
-                if(row.isActive()){
-                    System.out.println(row.getButtonBSave().getCode());
-                    if(row.getButtonBSave().getOrigin() == ButtonCode.KEY)
-                        robot.keyPress(row.getButtonBSave().getCode());
-                    else
-                        robot.mousePress(row.getButtonBSave().getCode());
-                }
-            }
-        }
-    }
-
-    @Override
-    public void nativeMouseReleased(NativeMouseEvent nativeMouseEvent) {
-        int code = nativeMouseEvent.getButton();
-        int codeTransform;
-        switch (code){
-            case 1: codeTransform = 16; break;
-            case 2: codeTransform = 4; break;
-            case 3: codeTransform = 8; break;
-            default: codeTransform = 0;
-        }
-        List<RowChangeController> listButtons = tableButtonsMouse.get(codeTransform);
-        if(listButtons != null){
-            for (RowChangeController row:listButtons) {
-                if(row.isActive()){
-                    System.out.println(row.getButtonBSave().getCode());
-                    if(row.getButtonBSave().getOrigin() == ButtonCode.KEY)
-                        robot.keyRelease(row.getButtonBSave().getCode());
-                    else
-                        robot.mouseRelease(row.getButtonBSave().getCode());
-                }
-            }
-        }
-    }
 
 }
