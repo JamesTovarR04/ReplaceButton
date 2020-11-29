@@ -78,5 +78,15 @@
             </Label>
          </children></HBox>
       <ScrollPane id="scrollPaneList" fx:id="listChanges" hbarPolicy="NEVER" layoutX="14.0" layoutY="80.0" prefHeight="208.0" prefWidth="380.0" style="-fx-background: transparent; -fx-background-color: none;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="281.0" prefHeight="39.0" prefWidth="380.0">
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="32.0" prefWidth="118.0" text="Developed by:" textAlignment="CENTER" />
+            <Hyperlink focusTraversable="false" onAction="#openLinkCredits" opacity="0.6" prefHeight="32.0" prefWidth="145.0" text="Jatrodtx - 2020">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Hyperlink>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

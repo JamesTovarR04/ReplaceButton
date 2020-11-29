@@ -14,7 +14,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class StartWindowController {
 
@@ -82,6 +85,20 @@ public class StartWindowController {
             activateButton.setAlignment(Pos.CENTER_LEFT);
             activateButton.setStyle("-fx-padding: 1 3 1 3; -fx-background-radius: 30;-fx-background-color: #4f4f4f;");
             statusLabel.setText("Disabled");
+        }
+    }
+
+    @FXML
+    private void openLinkCredits(){
+        if(Desktop.isDesktopSupported())
+        {
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/JamesTovarR04"));
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (URISyntaxException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

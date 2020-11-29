@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ChangeButton:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ChangeButton_jar</output-path>
+    <root id="archive" name="ChangeButton.jar">
+      <element id="module-output" name="ChangeButton" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../JNativeHook.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
