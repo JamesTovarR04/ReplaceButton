@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="ChangeButton.jnlp">
+  <information>
+    <title>ChangeButton</title>
+    <vendor>Unknown</vendor>
+    <description>ChangeButton</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="ChangeButton.jar" size="20240" download="eager" />
+    <jar href="JNativeHook.jar" size="154972" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="600" height="400" main-class="com.jatrex.changeButton.Main"  name="ChangeButton" />
+  <update check="always"/>
+</jnlp>

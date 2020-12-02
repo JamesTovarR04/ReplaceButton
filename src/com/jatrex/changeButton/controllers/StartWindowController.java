@@ -40,7 +40,8 @@ public class StartWindowController {
 
         // Generate first row
         RowChangeController controllerRow = new RowChangeController();
-        FXMLLoader viewRowChange = new FXMLLoader(getClass().getResource("../views/rowChange.fxml"));
+        String route = "/com/jatrex/changeButton/views/rowChange.fxml";
+        FXMLLoader viewRowChange = new FXMLLoader(getClass().getResource(route));
         viewRowChange.setController(controllerRow);
         HBox row = viewRowChange.load();
 

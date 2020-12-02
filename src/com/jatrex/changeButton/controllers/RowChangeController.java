@@ -51,7 +51,7 @@ public class RowChangeController {
         standbyButton = (Button) event.getSource();
         standbyButton.setText("Press a button");
         standbyButton.setDisable(true);
-        changeIconButton("../views/images/add.png");
+        changeIconButton("/com/jatrex/changeButton/views/images/add.png");
         deleteButton.setDisable(true);
 
         ReadButton reader = new ReadButton();
@@ -76,10 +76,10 @@ public class RowChangeController {
         String text;
         if( buttonCode.getOrigin() == ButtonCode.KEY ){
             text = "key " + buttonCode.getStringKey();
-            changeIconButton("../views/images/keyboard.png");
+            changeIconButton("/com/jatrex/changeButton/views/images/keyboard.png");
         }else{
             text = "Button " + buttonCode.getCode();
-            changeIconButton("../views/images/mouse.png");
+            changeIconButton("/com/jatrex/changeButton/views/images/mouse.png");
         }
         standbyButton.setText(text);
         standbyButton.setDisable(false);
@@ -111,7 +111,7 @@ public class RowChangeController {
         // If it not is the last element don´t create a new element
         if((listContainer.getChildren().indexOf(container) + 1) == listContainer.getChildren().size()) {
             RowChangeController controllerRow = new RowChangeController();
-            FXMLLoader viewRowChange = new FXMLLoader(getClass().getResource("../views/rowChange.fxml"));
+            FXMLLoader viewRowChange = new FXMLLoader(getClass().getResource("/com/jatrex/changeButton/views/rowChange.fxml"));
             viewRowChange.setController(controllerRow);
             controllerRow.setManagerChangesButtons(managerChangesButtons);
             HBox row = new HBox();
